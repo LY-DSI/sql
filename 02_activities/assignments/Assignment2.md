@@ -54,7 +54,32 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Slowly Changing dimensions (SCD) types:
+Type 1: overwrites previous data, retaining only the latest address
+Table design: 
+CUSTOMER_ADDRESS (Type 1)
+- Customer_ID (PK, FK → Customer.Customer_ID)
+- StreetAddress
+- City
+- Province
+- Postal_code
+- Country
+
+Type 2: maintains full history with validity periods
+Table design: 
+CUSTOMER_ADDRESS (Type 2)
+- Address_ID (PK)
+- Customer_ID (FK → Customer.Customer_ID)
+- StreetAddress
+- City
+- Province
+- Postal_code
+- Country
+- Start_Date (NOT NULL)
+- End_Date (NULLABLE)
+- Is_Current (BOOLEAN)
+
+For most bookstores, Type 2 is preferable to maintain shipping history and customer relocation patterns.
 ```
 
 ***
@@ -182,5 +207,15 @@ Consider, for example, concepts of labour, bias, LLM proliferation, moderating c
 
 
 ```
-Your thoughts...
+Vicki Boykis’s article underscores a critical truth: neural networks are not autonomous systems but human artifacts shaped by the values, labor, and biases of their creators. This raises ethical concerns about labor, bias, and the societal impact of deploying black-box technologies.
+
+Behind every neural network is the often-overlooked labor of humans. Workers, frequently underpaid gig laborers in unstable jobs, curate, label, and filter training data, performing repetitive tasks and encountering harmful content. For example, content moderators suffer psychological harm while removing violent or hateful material from platforms. This imbalance—where tech companies profit from systems reliant on exploited and undervalued labor—highlights ethical issues such as fair wages, worker rights, and corporate accountability in the AI supply chain.
+
+Neural networks often amplify societal biases present in their training data. For instance, facial recognition systems misidentify people of color, hiring algorithms disadvantage women, and language models reinforce stereotypes. These issues are not technical errors but reflections of historical inequalities embedded in the data. Boykis emphasizes that human subjectivity shapes every stage of AI development, from data selection to problem framing. Ethical AI requires examining whose perspectives influence these systems and who is negatively impacted by their outputs. Without addressing these biases, the widespread use of large language models (LLMs) risks automating discrimination on a large scale.
+
+Automated content moderation, which often depends on neural networks, highlights the conflict between scalability and ethics. While AI can identify harmful content, it often fails to understand context, such as satire, cultural nuances, or systemic oppression. Relying too heavily on these tools risks silencing marginalized voices or reinforcing platform biases. At the same time, human moderators face excessive workloads and inadequate protections. This reveals a broader ethical problem: technologies meant to address social issues frequently prioritize corporate profits over the well-being of communities.
+
+While neural networks are mathematical systems, their effects are profoundly human. Tackling these challenges requires collaboration across disciplines—including ethicists, sociologists, and impacted communities—and rethinking AI governance to prioritize fairness over efficiency. Only by recognizing the human influence behind these technologies can we guide them toward justice instead of exploitation.
+
+
 ```
